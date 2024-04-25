@@ -1,18 +1,18 @@
 import { cn } from "@/lib/utils";
-import { ChevronsLeft, MenuIcon, PlusCircle, Search, Settings } from "lucide-react";
-import { usePathname } from "next/navigation";
 import { ElementRef, useEffect, useRef, useState } from "react";
 import { useMediaQuery } from "usehooks-ts";
-import { api } from "@/convex/_generated/api";
+import { usePathname } from "next/navigation";
+import { ChevronsLeft, MenuIcon, PlusCircle, Search, Settings } from "lucide-react";
 import UserItem from "@/app/(main)/components/user-item";
-import { useMutation, useQuery } from "convex/react";
 import { Item } from "@/app/(main)/components/item";
+import { DocumentList } from "@/app/(main)/components/document-list";
+import { api } from "@/convex/_generated/api";
+import { useMutation } from "convex/react";
 import { toast } from "sonner";
 
 export const Navigation = () => {
     const pathname = usePathname();
     const isMobile = useMediaQuery("(max-width: 768px)");
-    const documents = useQuery(api.documents.get);
     const create = useMutation(api.documents.create);
 
     const isResizingRef = useRef(false);
@@ -125,11 +125,7 @@ export const Navigation = () => {
                     <Item onClick={handleCreate} label="New page" icon={PlusCircle}/>
                 </div>
                 <div className="mt-4">
-                    {documents?.map((doc) => (
-                        <p key={doc._id}>
-                            {doc.title}
-                        </p>
-                    ))}
+                    <DocumentList/>
                 </div>
                 <div
                 onMouseDown={handleMouseDown} 
