@@ -1,3 +1,4 @@
+import { Toaster } from "sonner";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
@@ -33,10 +34,10 @@ export default function RootLayout({
       <body className={inter.className}>
         <ConvexClientProviders>
 
-      <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange storageKey="notei-theme-2">
-
-        {children}
-      </ThemeProvider>
+        <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange storageKey="notei-theme-2">
+          <Toaster position="bottom-center"/>
+          {children}
+        </ThemeProvider>
         </ConvexClientProviders>
       </body>
     </html>
