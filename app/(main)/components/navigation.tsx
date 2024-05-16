@@ -18,6 +18,7 @@ import {
 import { useSearch } from "@/hooks/use-search";
 import { useSettings } from "@/hooks/use-settings";
 import { Navbar } from "@/app/(main)/components/navbar";
+import { useRouter } from "next/navigation";
 
 
 export const Navigation = () => {
@@ -27,6 +28,7 @@ export const Navigation = () => {
     const create = useMutation(api.documents.create);
     const search = useSearch();
     const settings = useSettings();
+    const router = useRouter();
     
     const isResizingRef = useRef(false);
     const sidebarRef = useRef<ElementRef<"aside">>(null);
@@ -109,8 +111,9 @@ export const Navigation = () => {
     }
 
     const handleCreate = () => {
-        const promise = create({ title: "Untitled" });
-
+        const promise = create({ title: "Untitled" })
+            .then((documentId) => router.push(`/documents/${documentId}`))
+            
         toast.promise(promise,{
             loading: "Creating a new note...",
             success: "Note created",

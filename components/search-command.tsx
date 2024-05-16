@@ -1,6 +1,6 @@
 'use client'
 
-import { use, useEffect, useState } from "react"
+import { useEffect, useState } from "react"
 import { File } from "lucide-react"
 import { useQuery } from "convex/react"
 import { api } from "@/convex/_generated/api"
@@ -49,7 +49,7 @@ export const SearchCommand = () => {
     const onSelect = (id: string) => {
         router.push(`/documents/${id}`)
         onClose();
-    }
+    };
 
     if(!isMounted){
         return null;
@@ -66,7 +66,7 @@ export const SearchCommand = () => {
                             key={doc._id}
                             value={`${doc._id}-${doc.title}`}
                             title={doc.title}
-                            onSelect={onSelect}
+                            onSelect={()=> onSelect(doc._id)}
                         >
                             {doc.icon ? (
                                 <p className="mr-2 text-[18px]">{doc.icon}</p>
