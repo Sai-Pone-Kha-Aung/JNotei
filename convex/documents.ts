@@ -271,7 +271,6 @@ export const getById = query({
             return document;
         }
 
-     
         if(!identity) {
             throw new Error("Not authenticated");
         }
